@@ -1,3 +1,6 @@
+import sum from "@/test";
+const total = sum(1,2)
+console.log(total);
 
 
 function App() {
