@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Button } from "antd-mobile";
 const Layout = () => {
   return (
     <div>
@@ -10,6 +11,7 @@ const Layout = () => {
         <p>Welcome to my application!</p>
 
       </main>
+      <Button color="primary">Click Me</Button>
 
       <footer>
         <p>© 2023 My Application</p>
