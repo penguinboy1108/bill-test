@@ -7,16 +7,18 @@
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd-mobile": "^5.39.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^7.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server ./server/data.json --port 8888"
   },
   "eslintConfig": {
     "extends": [
@@ -37,6 +39,8 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^5.9.0",
+    "json-server": "^1.0.0-beta.3",
+    "react-scripts": "^5.0.1"
   }
 }
