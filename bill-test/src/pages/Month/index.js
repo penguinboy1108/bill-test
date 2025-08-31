@@ -8,7 +8,7 @@ import _ from 'lodash'
 
 const Month = () => {
   //setDateVisible
-  const billList = useSelector(state => state.billList);
+  const billList = useSelector(state => state.bill.billList);
   const billGroup = useMemo(() => {
     return _.groupBy(billList, item => dayjs(item.date).format('YYYY-MM'));
   }, [billList]);
@@ -19,14 +19,18 @@ const Month = () => {
     const income = currentMonthList.filter(item => item.type === 'income').reduce((total, item) => total + item.money, 0);
     return { pay, income, total: income + pay };
   }, [currentMonthList]);
-    };
 
   const [currentDate, setCurrentDate] = useState(()=>{
+
     return dayjs(new Date()).format('YYYY-MM');
   });
   const onConfirm = (date) => {
+    
     setCurrentDate(dayjs(date).format('YYYY-MM'));
+
     setMonthList(billGroup[dayjs(date).format('YYYY-MM')] || []);
+    console.log(billGroup, monthResult);
+
     setDateVisible(false);
   };
   return (
@@ -46,15 +50,15 @@ const Month = () => {
           {/* 统计区域 */}
           <div className='twoLineOverview'>
             <div className="item">
-              <span className="money">{100}</span>
+              <span className="money">{monthResult.pay.toFixed(2)}</span>
               <span className="type">支出</span>
             </div>
             <div className="item">
-              <span className="money">{200}</span>
+              <span className="money">{monthResult.income.toFixed(2)}</span>
               <span className="type">收入</span>
             </div>
             <div className="item">
-              <span className="money">{200}</span>
+              <span className="money">{monthResult.total.toFixed(2)}</span>
               <span className="type">结余</span>
             </div>
           </div>

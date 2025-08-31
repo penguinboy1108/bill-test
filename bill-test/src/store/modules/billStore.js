@@ -24,6 +24,8 @@ const getBillList =() =>{
         // console.log('Fetching bill list...');
         try {
             const response = await axios.get('http://localhost:8888/ka');
+            // console.log('Fetched bill list:', response.data);
+
             dispatch(setBillList(response.data));
             // console.log(
             //     'Fetched bill list:',

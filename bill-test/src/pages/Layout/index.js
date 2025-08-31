@@ -6,6 +6,9 @@ import {
   AddCircleOutline
 } from 'antd-mobile-icons'
 import './index.scss'
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getBillList } from "../../store/modules/billStore";
 
 const tabs = [
   {
@@ -26,9 +29,16 @@ const tabs = [
 ]
 
 const Layout = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+    useEffect(() => {
+    dispatch(getBillList());   // 👈 必须调用
+  }, [dispatch]);
 
+  const switchRoute = (path) => {
+    navigate(path);
+  };
   return (
     <div className="kaLayout">
       <div className="page">
@@ -39,7 +49,7 @@ const Layout = () => {
       <TabBar
         className="tabbar"
         activeKey={location.pathname}
-        onChange={key => navigate(key)}
+        onChange={switchRoute}
       >
         {tabs.map(item => (
           <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
