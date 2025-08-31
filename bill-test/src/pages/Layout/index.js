@@ -33,7 +33,7 @@ const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
     useEffect(() => {
-    dispatch(getBillList());   // 👈 必须调用
+    dispatch(getBillList());   
   }, [dispatch]);
 
   const switchRoute = (path) => {
