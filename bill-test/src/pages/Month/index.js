@@ -12,13 +12,21 @@ const Month = () => {
   const billGroup = useMemo(() => {
     return _.groupBy(billList, item => dayjs(item.date).format('YYYY-MM'));
   }, [billList]);
-
+  const [currentMonthList, setMonthList] = useState([]);
   const [dateVisible, setDateVisible] = useState(false);
+  const monthResult = useMemo(() => {
+    const pay = currentMonthList.filter(item => item.type === 'pay').reduce((total, item) => total + item.money, 0);
+    const income = currentMonthList.filter(item => item.type === 'income').reduce((total, item) => total + item.money, 0);
+    return { pay, income, total: income + pay };
+  }, [currentMonthList]);
+    };
+
   const [currentDate, setCurrentDate] = useState(()=>{
     return dayjs(new Date()).format('YYYY-MM');
   });
   const onConfirm = (date) => {
     setCurrentDate(dayjs(date).format('YYYY-MM'));
+    setMonthList(billGroup[dayjs(date).format('YYYY-MM')] || []);
     setDateVisible(false);
   };
   return (
