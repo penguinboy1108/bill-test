@@ -1,6 +1,6 @@
 import { NavBar, DatePicker } from 'antd-mobile'
 import './index.scss'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames'
 import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
@@ -20,8 +20,15 @@ const Month = () => {
     return { pay, income, total: income + pay };
   }, [currentMonthList]);
 
-  const [currentDate, setCurrentDate] = useState(()=>{
+  // set currentDate
+  useEffect(() => {
+    const nowDate = dayjs(new Date()).format('YYYY-MM');
+    if (billGroup[nowDate]) {
+      setMonthList(billGroup[nowDate]);
+    }
+  }, [billGroup]);
 
+  const [currentDate, setCurrentDate] = useState(() => {
     return dayjs(new Date()).format('YYYY-MM');
   });
   const onConfirm = (date) => {
