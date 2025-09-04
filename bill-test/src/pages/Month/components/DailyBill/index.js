@@ -11,7 +11,7 @@ const DailyBill = ({ date, billList }) => {
       const income = safeList.filter(item => item.type === 'income').reduce((total, item) => total + item.money, 0);
       
       return { pay, income, total: income + pay };
-    }, [billList, date]);
+    }, [billList]);
 
   return (
     <div className={classNames('dailyBill')}>
