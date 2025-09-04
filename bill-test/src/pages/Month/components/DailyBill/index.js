@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import './index.scss'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { billTypeToName } from '@/contants'
 const DailyBill = ({ date, billList }) => {
-
+    const [visible, setVisible] = useState(false);
     const dailyResult = useMemo(() => {
       console.log(billList);
       const safeList = Array.isArray(billList) ? billList : [];
@@ -17,7 +17,7 @@ const DailyBill = ({ date, billList }) => {
       <div className="header">
         <div className="dateIcon">
           <span className="date">{date}</span>
-          <span className={classNames('arrow')}></span>
+          <span className={classNames('arrow', { expand: visible })} onClick={() => setVisible(!visible)}></span>
         </div>
         <div className="oneLineOverview">
           <div className="pay">
@@ -35,7 +35,7 @@ const DailyBill = ({ date, billList }) => {
         </div>
       </div>
     {/* 单日列表 */}
-<div className="billList">
+<div className="billList" style={{ display: visible ? 'block' : 'none' }}>
   {billList.map(item => {
     return (
       <div className="bill" key={item.id}>
