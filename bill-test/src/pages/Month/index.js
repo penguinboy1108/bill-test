@@ -33,9 +33,10 @@ const Month = () => {
     return dayjs(new Date()).format('YYYY-MM');
   });
 
-    const DailyGroup = useMemo(() => {
+    const dailyGroup = useMemo(() => {
       const groupData = _.groupBy(currentMonthList, item => dayjs(item.date).format('YYYY-MM-DD'));
       const keys = Object.keys(groupData);
+      // console.log(groupData);
       return { keys, groupData };
   }, [currentMonthList]);
   
@@ -90,8 +91,8 @@ const Month = () => {
           />
         </div>
         {/* <DailyBill /> */}
-        {DailyGroup.keys.map(key => {
-          return <DailyBill key={key} date={key} list={DailyGroup.groupData[key]} />
+        {dailyGroup.keys.map(key => {
+          return <DailyBill key={key} date={key} billList={dailyGroup.groupData[key]} />
         })}
       </div>
     </div >
