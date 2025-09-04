@@ -44,7 +44,7 @@ const Month = () => {
     setCurrentDate(dayjs(date).format('YYYY-MM'));
 
     setMonthList(billGroup[dayjs(date).format('YYYY-MM')] || []);
-    console.log(billGroup, monthResult);
+    // console.log(billGroup, monthResult);
 
     setDateVisible(false);
   };
@@ -89,10 +89,10 @@ const Month = () => {
             onConfirm={onConfirm}
           />
         </div>
-        <DailyBill />
-        {DailyGroup.keys.map(key => ( 
-          <DailyBill key={key} date={key} list={DailyGroup.groupData[key]} />
-        ))}
+        {/* <DailyBill /> */}
+        {DailyGroup.keys.map(key => {
+          return <DailyBill key={key} date={key} list={DailyGroup.groupData[key]} />
+        })}
       </div>
     </div >
   )
